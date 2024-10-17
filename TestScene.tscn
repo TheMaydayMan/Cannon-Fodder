@@ -1,0 +1,87 @@
+[gd_scene load_steps=4 format=3 uid="uid://phyd7njiux56"]
+
+[ext_resource type="Script" path="res://PolyBody.gd" id="1_601t6"]
+[ext_resource type="Script" path="res://Outline.gd" id="2_prhog"]
+[ext_resource type="Script" path="res://PolyHole.gd" id="3_dd3cx"]
+
+[node name="TestScene" type="Node2D"]
+
+[node name="BodyA1" type="Polygon2D" parent="."]
+z_index = -1
+position = Vector2(120.8, 59.3322)
+rotation = 0.51732
+color = Color(0, 1, 0, 1)
+polygon = PackedVector2Array(170, 156, 278, 96, 369, 199, 456, 147, 572, 251, 419, 276, 318, 357, 276, 228)
+script = ExtResource("1_601t6")
+
+[node name="Outline" type="Line2D" parent="BodyA1"]
+closed = true
+width = 3.0
+script = ExtResource("2_prhog")
+
+[node name="BodyA2" type="Polygon2D" parent="." node_paths=PackedStringArray("connections")]
+position = Vector2(120.8, 59.3322)
+rotation = 0.51732
+color = Color(1, 1, 0, 1)
+polygon = PackedVector2Array(205.649, 68.2227, 218.64, 18.2603, 310.425, -48.923, 343.861, 48.2574, 289.961, 153.713, 267.332, 115.965, 292.596, 69.3738)
+script = ExtResource("1_601t6")
+connections = [NodePath("../BodyA3"), NodePath("../BodyA1")]
+
+[node name="Outline" type="Line2D" parent="BodyA2"]
+closed = true
+width = 3.0
+script = ExtResource("2_prhog")
+
+[node name="BodyA3" type="Polygon2D" parent="." node_paths=PackedStringArray("anchors")]
+z_index = 1
+position = Vector2(65, 41.6661)
+rotation = 0.51732
+color = Color(1, 0, 1, 1)
+polygon = PackedVector2Array(308.268, -22.3835, 470.904, -104.57, 434.214, -253.975, 748.395, -458.059, 883.197, -241.371, 631.673, 20.2551, 484.736, -72.1713, 330.224, 44.5115)
+script = ExtResource("1_601t6")
+anchors = [NodePath("Anchor")]
+
+[node name="Anchor" type="Node2D" parent="BodyA3"]
+position = Vector2(719.237, -361.695)
+
+[node name="Outline" type="Line2D" parent="BodyA3"]
+closed = true
+width = 3.0
+script = ExtResource("2_prhog")
+
+[node name="BodyB1" type="Polygon2D" parent="."]
+z_index = -1
+position = Vector2(294, 13)
+rotation = 0.449195
+color = Color(0, 0, 1, 1)
+polygon = PackedVector2Array(100, 0, 100, 100, 0, 100, 0, 0)
+script = ExtResource("1_601t6")
+
+[node name="Outline" type="Line2D" parent="BodyB1"]
+closed = true
+width = 3.0
+script = ExtResource("2_prhog")
+
+[node name="Ground" type="Polygon2D" parent="." node_paths=PackedStringArray("anchors")]
+z_index = 1
+position = Vector2(-19, 24)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(755, 588, 619, 613, 634, 376, 826, 404, 972, 454, 1085, 533, 969, 618)
+script = ExtResource("1_601t6")
+anchors = [NodePath("Anchor")]
+
+[node name="Anchor" type="Node2D" parent="Ground"]
+position = Vector2(682, 519)
+
+[node name="Outline" type="Line2D" parent="Ground"]
+closed = true
+width = 3.0
+script = ExtResource("2_prhog")
+
+[node name="Hole" type="Polygon2D" parent="."]
+modulate = Color(1, 0, 0, 0.498039)
+z_index = 1
+position = Vector2(-72, 82)
+rotation = -0.0881496
+polygon = PackedVector2Array(757, -22, 691, 355, 809, 629, 849, 346)
+script = ExtResource("3_dd3cx")
