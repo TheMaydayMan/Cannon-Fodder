@@ -3,6 +3,7 @@ class_name PolyBody
 
 ## Density in kg per 10000 square units (100x100).
 @export var density : float = 1
+@export var fragile : bool
 @export var draw_info : bool
 @export var info_color : Color
 @export var connections : Array[PolyBody]
@@ -126,12 +127,15 @@ func apply_hole(hole_global_poly: PackedVector2Array) -> void:
 		var clips = Geometry2D.clip_polygons(poly.global_polygon(), hole_global_poly)
 		if clips.size() == 0: # Destroy complete clips
 			poly_col.queue_free()
-		elif clips[0] != poly.global_polygon():
+		elif polygon_area(clips[0]) != polygon_area(poly.global_polygon()):
+			if poly.fragile:
+				poly_col.queue_free()
 			var new_poly = poly_col
 			for clip in clips: # Create new polygons for splits
 				new_poly.polygon = poly.global_to_local_polygon(clip)
 				new_poly.get_child(0).polygon = new_poly.polygon
-				body.add_child(new_poly)
+				if new_poly != poly_col:
+					body.add_child(new_poly)
 				new_poly = poly_col.duplicate()
 				new_poly.get_child(0).anchor_locations = poly_col.get_child(0).anchor_locations
 	disconnect_polygons()

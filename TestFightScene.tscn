@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://bf4ae8xkrx3kq"]
+
+[ext_resource type="Script" path="res://PolyBody.gd" id="1_easx5"]
+[ext_resource type="Texture2D" uid="uid://ogcq4v5hux1k" path="res://CheckerTexture.png" id="1_s4tai"]
+[ext_resource type="Script" path="res://Cannon.gd" id="3_pcga0"]
+
+[node name="TestFightScene" type="Node2D"]
+
+[node name="Castle Base" type="Polygon2D" parent="." node_paths=PackedStringArray("connections", "anchors")]
+texture_repeat = 2
+position = Vector2(0, 89)
+color = Color(0.666567, 0.666569, 0.666568, 1)
+texture = ExtResource("1_s4tai")
+polygon = PackedVector2Array(120, 333, 120, 94, 287, 94, 287, 333)
+script = ExtResource("1_easx5")
+connections = [NodePath("../Cannon")]
+anchors = [NodePath("Left Anchor"), NodePath("Center Anchor"), NodePath("Right Anchor")]
+
+[node name="Left Anchor" type="Node2D" parent="Castle Base"]
+position = Vector2(121, 332)
+
+[node name="Center Anchor" type="Node2D" parent="Castle Base"]
+position = Vector2(203, 332)
+
+[node name="Right Anchor" type="Node2D" parent="Castle Base"]
+position = Vector2(286, 332)
+
+[node name="Cannon" type="Polygon2D" parent="."]
+z_index = 5
+position = Vector2(287, 183)
+color = Color(0.29219, 0.29219, 0.29219, 1)
+polygon = PackedVector2Array(15, 0, 11, 11, 0, 15, -11, 11, -15, 0, -11, -11, 0, -15, 11, -11)
+script = ExtResource("3_pcga0")
+max_power = 1000.0
+aim_power_scale = 4.0
+cannonball_radius = 5.0
+blast_radius = 50.0
+fragile = true
+
+[node name="Landscape" type="Polygon2D" parent="." node_paths=PackedStringArray("anchors")]
+texture_repeat = 2
+position = Vector2(0, 89)
+color = Color(0.982309, 0.384658, 3.85046e-07, 1)
+texture = ExtResource("1_s4tai")
+texture_scale = Vector2(0.655, 0.655)
+polygon = PackedVector2Array(-30, 750, 1310, 750, 1310, 37, 1261, 6, 1133, -13, 965, 37, 1032, 205, 1091, 272, 1096, 360, 976, 499, 819, 560, 669, 501, 528, 528, 397, 437, 311, 333, 106, 333, -30, 408)
+script = ExtResource("1_easx5")
+anchors = [NodePath("Left Anchor"), NodePath("Right Anchor")]
+
+[node name="Left Anchor" type="Node2D" parent="Landscape"]
+position = Vector2(-25, 745)
+
+[node name="Right Anchor" type="Node2D" parent="Landscape"]
+position = Vector2(1305, 745)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]

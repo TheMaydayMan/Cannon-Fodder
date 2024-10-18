@@ -20,7 +20,6 @@ func _ready() -> void:
 	area = Area2D.new()
 	get_parent().add_child.call_deferred(area)
 	collider.reparent.call_deferred(area)
-	await get_tree().create_timer(1).timeout
 	apply()
 
 func apply() -> void:
@@ -33,8 +32,9 @@ func apply() -> void:
 			return
 	else:
 		for body in overlapping_bodies:
-			if body.get_meta("IS_POLYBODY"):
-				body.get_child(0).get_child(0).apply_hole(global_polygon())
+			if body.has_meta("IS_POLYBODY"):
+				if body.get_meta("IS_POLYBODY"):
+					body.get_child(0).get_child(0).apply_hole(global_polygon())
 	area.queue_free() # Destroy the area once application is finished (or if collision fails)
 
 ## Get this polygon's points in world space
