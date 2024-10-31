@@ -37,6 +37,10 @@ func _ready() -> void:
 	else: # This is a clone from a hole operation
 		collider = get_parent()
 		body = collider.get_parent()
+		# Remove all freed connections
+		for connection in connections:
+			if not is_instance_valid(connection):
+				connections.erase(connection)
 	
 	## Group all connected polybodies under the same rigidbody
 	if body == null:
@@ -113,6 +117,14 @@ func recalibrate_centroid() -> void:
 	body.angular_velocity = original_angular_velocity
 
 
+func _notification(what):
+	if what == NOTIFICATION_PREDELETE: # Destroy empty bodies
+		if is_instance_valid(body):
+			if body.get_children().size() == 0:
+				body.queue_free()
+		else:
+			collider.queue_free()
+
 func apply_hole(hole_global_poly: PackedVector2Array) -> void:
 	## Calibrate rotation to 0
 	for poly_col in body.get_children():
@@ -126,20 +138,27 @@ func apply_hole(hole_global_poly: PackedVector2Array) -> void:
 		var poly = poly_col.get_child(0)
 		var clips = Geometry2D.clip_polygons(poly.global_polygon(), hole_global_poly)
 		if clips.size() == 0: # Destroy complete clips
+			if body.get_children().size() == 1:
+				body.queue_free()
 			poly_col.queue_free()
 		elif polygon_area(clips[0]) != polygon_area(poly.global_polygon()):
 			if poly.fragile:
+				if body.get_children().size() == 1:
+					body.queue_free()
 				poly_col.queue_free()
-			var new_poly = poly_col
-			for clip in clips: # Create new polygons for splits
-				new_poly.polygon = poly.global_to_local_polygon(clip)
-				new_poly.get_child(0).polygon = new_poly.polygon
-				if new_poly != poly_col:
-					body.add_child(new_poly)
-				new_poly = poly_col.duplicate()
-				new_poly.get_child(0).anchor_locations = poly_col.get_child(0).anchor_locations
-	disconnect_polygons()
-	recalibrate_centroid()
+			else:
+				var new_poly = poly_col
+				for clip in clips: # Create new polygons for splits
+					new_poly.polygon = poly.global_to_local_polygon(clip)
+					new_poly.get_child(0).polygon = new_poly.polygon
+					if polygon_area(new_poly.polygon) != polygon_area(poly_col.polygon):
+						body.add_child(new_poly)
+					new_poly = poly_col.duplicate()
+					new_poly.get_child(0).anchor_locations = poly_col.get_child(0).anchor_locations
+	
+	if body:
+		disconnect_polygons()
+		recalibrate_centroid()
 
 func disconnect_polygons() -> void:
 	## Get the groups of connected polygons
@@ -178,7 +197,6 @@ func disconnect_polygons() -> void:
 				poly_col.reparent(new_body)
 				poly_col.get_child(0).body = new_body
 		group.keys()[0].get_child(0).recalibrate_centroid()
-
 
 func _process(_delta: float) -> void:
 	queue_redraw()
@@ -236,4 +254,4 @@ func polygon_centroid(poly: PackedVector2Array) -> Vector2:
 		centroid += (poly[q] + poly[p]) * factor
 	
 	centroid /= (6.0 * area)
-	return centroid.abs()
+	return centroid
