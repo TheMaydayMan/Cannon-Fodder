@@ -91,30 +91,30 @@ closed = true
 width = 4.0
 script = ExtResource("5_0tvni")
 
-[node name="Sky Rock" type="Polygon2D" parent="." node_paths=PackedStringArray("anchors")]
+[node name="Leaves" type="Polygon2D" parent="." node_paths=PackedStringArray("anchors")]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_16xff")
 position = Vector2(-1280, -218)
-color = Color(0.405217, 0.938896, 0.409114, 1)
+color = Color(0.438313, 0.926235, 0.346251, 1)
 texture = ExtResource("1_s4tai")
 polygon = PackedVector2Array(1044, 98, 1082, 197, 1216, 229, 1390, 199, 1407, 106, 1475, 43, 1450, -20, 1375, -78, 1259, -98, 1115, -73, 1112, 23)
 script = ExtResource("1_easx5")
 anchors = [NodePath("Left Anchor"), NodePath("Right Anchor")]
 metadata/_edit_group_ = true
 
-[node name="Left Anchor" type="Node2D" parent="Sky Rock"]
+[node name="Left Anchor" type="Node2D" parent="Leaves"]
 position = Vector2(1168, 209)
 
-[node name="Top Anchor" type="Node2D" parent="Sky Rock"]
+[node name="Top Anchor" type="Node2D" parent="Leaves"]
 position = Vector2(1236, 184)
 
-[node name="Bottom Anchor" type="Node2D" parent="Sky Rock"]
+[node name="Bottom Anchor" type="Node2D" parent="Leaves"]
 position = Vector2(1234, 221)
 
-[node name="Right Anchor" type="Node2D" parent="Sky Rock"]
+[node name="Right Anchor" type="Node2D" parent="Leaves"]
 position = Vector2(1296, 202)
 
-[node name="Outline" type="Line2D" parent="Sky Rock"]
+[node name="Outline" type="Line2D" parent="Leaves"]
 closed = true
 width = 4.0
 script = ExtResource("5_0tvni")
@@ -124,7 +124,7 @@ z_index = -5
 texture_repeat = 2
 material = SubResource("ShaderMaterial_16xff")
 position = Vector2(-1280, -222)
-color = Color(0.56553, 0.195074, 0.0093662, 1)
+color = Color(0.416603, 0.198472, 0.0115568, 1)
 texture = ExtResource("1_s4tai")
 polygon = PackedVector2Array(1097, 375, 1177, 311, 1179, 249, 1159, 206, 1200, 183, 1268, 176, 1306, 201, 1282, 245, 1282, 302, 1426, 380, 1466, 728, 1052, 728)
 metadata/_edit_group_ = true

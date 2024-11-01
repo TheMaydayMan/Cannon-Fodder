@@ -15,6 +15,7 @@ var shot_start
 var shot_velocity
 
 func _ready() -> void:
+	super()
 	set_values()
 
 func _process(delta: float) -> void:
@@ -39,11 +40,9 @@ func _draw() -> void:
 	super()
 	if enabled:
 		var gravity = ProjectSettings.get_setting("physics/2d/default_gravity_vector") * ProjectSettings.get_setting("physics/2d/default_gravity")
-		var mouse_t = ( sqrt((2 * gravity.y * (mouse_pos.y - centroid.y)) + pow(shot_velocity.y, 2) ) + shot_velocity.y ) / gravity.y
-		print(mouse_t)
 		
 		for i in range(10):
-			var t = i/40.0 + 0.018
+			var t = i/40.0
 			draw_circle((shot_velocity * t) + (0.5 * gravity * t * t) + (shot_start - global_position), 4, Color.WHITE)
 
 func _unhandled_input(event):

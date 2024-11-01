@@ -97,6 +97,9 @@ func recalibrate_centroid() -> void:
 		var mass = polygon_area(poly_col.polygon) * poly_col.get_child(0).density # Density determined by each polygon individually, overlaps count
 		centroid += polygon_centroid(move_polygon(poly_col.polygon, poly_col.global_position)) * mass
 		total_mass += mass
+	
+	if poly_count * ( total_mass / poly_count ) == 0: # Sure.
+		queue_free()
 	centroid /= poly_count * ( total_mass / poly_count ) # Finish average
 	body.mass = abs(total_mass) / 10000 # Also calculate the mass based on density and total area of each polygon
 	
@@ -123,7 +126,10 @@ func _notification(what):
 			if body.get_children().size() == 0:
 				body.queue_free()
 		else:
-			collider.queue_free()
+			if collider:
+				collider.queue_free()
+			else:
+				queue_free()
 
 func apply_hole(hole_global_poly: PackedVector2Array) -> void:
 	## Calibrate rotation to 0
@@ -143,6 +149,7 @@ func apply_hole(hole_global_poly: PackedVector2Array) -> void:
 			poly_col.queue_free()
 		elif polygon_area(clips[0]) != polygon_area(poly.global_polygon()):
 			if poly.fragile:
+				print("weird")
 				if body.get_children().size() == 1:
 					body.queue_free()
 				poly_col.queue_free()
