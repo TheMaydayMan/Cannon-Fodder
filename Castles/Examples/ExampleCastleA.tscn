@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://jr8c1gv1iudm"]
+[gd_scene load_steps=8 format=3 uid="uid://jr8c1gv1iudm"]
 
+[ext_resource type="Script" path="res://CastleScene.gd" id="1_6r1ki"]
 [ext_resource type="Shader" path="res://PolygonTextureWindow.gdshader" id="1_bxryh"]
 [ext_resource type="Texture2D" uid="uid://ogcq4v5hux1k" path="res://CheckerTexture.png" id="2_ngawk"]
 [ext_resource type="Script" path="res://PolyBody.gd" id="3_f2nue"]
@@ -12,16 +13,17 @@ shader_parameter/scale = 50.0
 shader_parameter/offset = Vector2(0, 0)
 
 [node name="ExampleCastleA" type="Node2D"]
+script = ExtResource("1_6r1ki")
 
 [node name="Castle Base" type="Polygon2D" parent="." node_paths=PackedStringArray("connections", "anchors")]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_2cwii")
-position = Vector2(-70, -199)
+position = Vector2(-70, -200)
 color = Color(0.666567, 0.666569, 0.666568, 1)
 texture = ExtResource("2_ngawk")
 polygon = PackedVector2Array(0, 200, 0, 0, 140, 0, 140, 200)
 script = ExtResource("3_f2nue")
-connections = [NodePath("")]
+connections = [NodePath("../Cannon")]
 anchors = [NodePath("Left Anchor"), NodePath("Center Anchor"), NodePath("Right Anchor")]
 metadata/_edit_group_ = true
 
@@ -41,7 +43,7 @@ script = ExtResource("4_h1jd0")
 
 [node name="Cannon" type="Polygon2D" parent="."]
 z_index = 5
-position = Vector2(70, -199)
+position = Vector2(70, -200)
 color = Color(0.29219, 0.29219, 0.29219, 1)
 polygon = PackedVector2Array(15, 0, 11, 11, 0, 15, -11, 11, -15, 0, -11, -11, 0, -15, 11, -11)
 script = ExtResource("5_j0kcw")

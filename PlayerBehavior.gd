@@ -1,11 +1,9 @@
 extends Node
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	var castleLocation = get_tree().current_scene.get_node(name + "CastleLocation")
+	var castle = preload("res://Castles/Examples/ExampleCastleA.tscn").instantiate()
+	castle.global_transform = castleLocation.global_transform
+	if castleLocation.flipped:
+		pass ## TODO
+	get_tree().current_scene.add_child(castle)
