@@ -78,8 +78,9 @@ func trigger():
 	cannonball_body.body_entered.connect(explode)
 	
 	await get_tree().create_timer(3).timeout
-	cannonball_body.queue_free()
-	on_resolved.emit()
+	if is_instance_valid(cannonball_body):
+		cannonball_body.queue_free()
+		on_resolved.emit()
 
 func _notification(what):
 	if what == NOTIFICATION_PREDELETE:

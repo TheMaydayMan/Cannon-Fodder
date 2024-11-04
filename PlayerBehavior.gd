@@ -54,5 +54,5 @@ func trigger_actions() -> void:
 
 func get_action_resolution_signals() -> Array:
 	var signals = []
-	for a in action_polies: signals.append(a.on_resolved)
+	for a in action_polies: if is_instance_valid(a): signals.append(a.on_resolved)
 	return signals

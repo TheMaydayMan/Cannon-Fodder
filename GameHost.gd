@@ -35,7 +35,8 @@ func _process(delta: float) -> void:
 func next_player() -> void:
 	players[active_player].change_turns(false)
 	if active_player == players.size() - 1:
-		resolve_round()
+		if not resolving_round:
+			resolve_round()
 	else:
 		active_player += 1
 		players[active_player].change_turns(true)
