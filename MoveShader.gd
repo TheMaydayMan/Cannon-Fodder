@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 		timer += delta * animation_speed
 	
 	var polygons = []
-	findByClass(get_tree().current_scene, "Polygon2D", polygons)
+	find_all_of_class(get_tree().current_scene, "Polygon2D", polygons)
 	
 	for polygon in polygons:
 		if polygon.material and polygon.material is ShaderMaterial:
@@ -23,8 +23,8 @@ func _process(delta: float) -> void:
 			elif animation_type == "Sinusoidal":
 				polygon.material.set_shader_parameter("offset", sin(timer) * animation_magnitude * Vector2.ONE)
 
-func findByClass(node: Node, className : String, result : Array) -> void:
-	if node.is_class(className) :
+func find_all_of_class(node: Node, class_name_str: String, result : Array) -> void:
+	if node.is_class(class_name_str) :
 		result.push_back(node)
 	for child in node.get_children():
-		findByClass(child, className, result)
+		find_all_of_class(child, class_name_str, result)

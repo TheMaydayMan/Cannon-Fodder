@@ -1,11 +1,23 @@
 extends PolyBody
+class_name ActionPolyBody
 
+var selected = false
+var selectable = false	
+var configured = false
+signal on_selected
+signal on_deselected
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _unhandled_input(event):
+	if selectable:
+		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			if Geometry2D.is_point_in_polygon(get_local_mouse_position(), polygon):
+				selected = true
+				on_selected.emit()
+	elif selected:
+		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			configured = true
+			selected = false
+			on_deselected.emit()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func trigger():
+	pass # This should be overrided by extenders

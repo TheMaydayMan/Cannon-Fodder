@@ -37,10 +37,11 @@ func _ready() -> void:
 	else: # This is a clone from a hole operation
 		collider = get_parent()
 		body = collider.get_parent()
-		# Remove all freed connections
-		for connection in connections:
-			if not is_instance_valid(connection):
-				connections.erase(connection)
+	
+	# Remove all freed connections
+	for connection in connections:
+		if not is_instance_valid(connection):
+			connections.erase(connection)
 	
 	## Group all connected polybodies under the same rigidbody
 	if body == null:
@@ -57,9 +58,10 @@ func _ready() -> void:
 			get_parent().add_child.call_deferred(body) # Since reparenting is deferred, this gets the will-be Collider's parent
 			recalibrate_centroid.call_deferred.call_deferred() # Double-deferral will cause this to execute very very last
 	for poly in connections: # Pull all bodiless connections into this body
-		if poly.body == null:
-			# Assign connection to own body
-			poly.body = body
+		if is_instance_valid(poly):
+			if poly.body == null:
+				# Assign connection to own body
+				poly.body = body
 	# Enter assigned body
 	collider.reparent.call_deferred(body)
 
@@ -98,7 +100,7 @@ func recalibrate_centroid() -> void:
 		centroid += polygon_centroid(move_polygon(poly_col.polygon, poly_col.global_position)) * mass
 		total_mass += mass
 	
-	if poly_count * ( total_mass / poly_count ) == 0: # Sure.
+	if poly_count * total_mass == 0: # Sure.
 		queue_free()
 	centroid /= poly_count * ( total_mass / poly_count ) # Finish average
 	body.mass = abs(total_mass) / 10000 # Also calculate the mass based on density and total area of each polygon
@@ -149,7 +151,6 @@ func apply_hole(hole_global_poly: PackedVector2Array) -> void:
 			poly_col.queue_free()
 		elif polygon_area(clips[0]) != polygon_area(poly.global_polygon()):
 			if poly.fragile:
-				print("weird")
 				if body.get_children().size() == 1:
 					body.queue_free()
 				poly_col.queue_free()
