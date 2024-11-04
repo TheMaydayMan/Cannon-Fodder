@@ -49,8 +49,6 @@ func resolve_round() -> void:
 	resolutions_recieved = 0
 
 func move_to_next_round() -> void:
-	print("boing")
 	resolutions_recieved += 1
 	if resolutions_required == resolutions_recieved:
-		print("poing")
 		new_round()

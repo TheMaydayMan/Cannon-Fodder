@@ -38,10 +38,15 @@ func _ready() -> void:
 		collider = get_parent()
 		body = collider.get_parent()
 	
-	# Remove all freed connections
-	for i in range(connections.size() - 1, -1, -1):
-		if not is_instance_valid(connections[i]):
-			connections.erase(connections[i])
+	# Find all invalid connections
+	var to_remove = []
+	for connection in connections:
+		if not is_instance_valid(connection):
+			to_remove.append(connection)
+
+	# Erase all invalid connections
+	for connection in to_remove:
+		connections.erase(connection)
 	
 	## Group all connected polybodies under the same rigidbody
 	if body == null:

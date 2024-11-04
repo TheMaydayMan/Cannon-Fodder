@@ -26,10 +26,9 @@ func _ready() -> void:
 
 func get_action_polies(node: Node, result: Array) -> void:
 	if node is ActionPolyBody:
-		if is_instance_valid(node):
-			result.push_back(node)
-			node.on_selected.connect(func x(): for a in action_polies: a.selectable = false)
-			node.on_deselected.connect(func x(): for a in action_polies: a.selectable = true)
+		result.push_back(node)
+		node.on_selected.connect(func x(): for a in action_polies: if is_instance_valid(a): a.selectable = false)
+		node.on_deselected.connect(func x(): for a in action_polies: if is_instance_valid(a): a.selectable = true)
 	for child in node.get_children():
 		get_action_polies(child, result)
 
