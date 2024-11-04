@@ -39,9 +39,9 @@ func _ready() -> void:
 		body = collider.get_parent()
 	
 	# Remove all freed connections
-	for connection in connections:
-		if not is_instance_valid(connection):
-			connections.erase(connection)
+	for i in range(connections.size() - 1, -1, -1):
+		if not is_instance_valid(connections[i]):
+			connections.erase(connections[i])
 	
 	## Group all connected polybodies under the same rigidbody
 	if body == null:

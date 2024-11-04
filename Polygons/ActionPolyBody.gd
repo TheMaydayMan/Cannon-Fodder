@@ -6,6 +6,7 @@ var selectable = false
 var configured = false
 signal on_selected
 signal on_deselected
+signal on_resolved
 
 func _unhandled_input(event):
 	if selectable:

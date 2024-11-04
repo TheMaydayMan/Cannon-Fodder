@@ -1,15 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://jr8c1gv1iudm"]
+[gd_scene load_steps=10 format=3 uid="uid://jr8c1gv1iudm"]
 
-[ext_resource type="Shader" path="res://PolygonTextureWindow.gdshader" id="1_bxryh"]
-[ext_resource type="Texture2D" uid="uid://ogcq4v5hux1k" path="res://CheckerTexture.png" id="2_ngawk"]
-[ext_resource type="Script" path="res://PolyBody.gd" id="3_f2nue"]
-[ext_resource type="Script" path="res://Outline.gd" id="4_h1jd0"]
-[ext_resource type="Script" path="res://Cannon.gd" id="5_j0kcw"]
+[ext_resource type="Shader" path="res://Visuals/PolygonTextureWindow.gdshader" id="1_bxryh"]
+[ext_resource type="Texture2D" uid="uid://ogcq4v5hux1k" path="res://Visuals/CheckerTexture.png" id="2_ngawk"]
+[ext_resource type="Script" path="res://Polygons/PolyBody.gd" id="3_f2nue"]
+[ext_resource type="Script" path="res://Polygons/Outline.gd" id="4_h1jd0"]
+[ext_resource type="Script" path="res://Polygons/Cannon.gd" id="5_j0kcw"]
+[ext_resource type="Shader" path="res://Visuals/MovingLine.gdshader" id="6_qg5rk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2cwii"]
 shader = ExtResource("1_bxryh")
 shader_parameter/scale = 50.0
 shader_parameter/offset = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ypoqt"]
+shader = ExtResource("6_qg5rk")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e5pfd"]
+shader = ExtResource("6_qg5rk")
 
 [node name="ExampleCastleA" type="Node2D"]
 
@@ -54,8 +61,11 @@ fragile = true
 metadata/_edit_group_ = true
 
 [node name="Outline" type="Line2D" parent="Cannon"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_ypoqt")
 closed = true
 width = 2.0
+texture_mode = 1
 script = ExtResource("4_h1jd0")
 
 [node name="Cannon2" type="Polygon2D" parent="."]
@@ -73,6 +83,9 @@ fragile = true
 metadata/_edit_group_ = true
 
 [node name="Outline" type="Line2D" parent="Cannon2"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_e5pfd")
 closed = true
 width = 2.0
+texture_mode = 1
 script = ExtResource("4_h1jd0")

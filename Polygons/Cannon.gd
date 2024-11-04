@@ -47,6 +47,7 @@ func _draw() -> void:
 			draw_circle((shot_velocity * t) + (0.5 * gravity * t * t) + (shot_start - global_position), 4, Color.WHITE if selected else Color(Color.WHITE, 0.5))
 
 func trigger():
+	# Create cannonball
 	var cannonball_body = RigidBody2D.new()
 	cannonball_body.global_position = shot_start + (direction * cannonball_radius)
 	cannonball_body.linear_velocity = shot_velocity
@@ -62,6 +63,7 @@ func trigger():
 	body.get_parent().add_child(cannonball_body)
 	cannonballs.append(cannonball_body)
 	
+	# Set to explode
 	var explode = func explode(_other: Node) -> void:
 		var hole = PolyHole.new()
 		if is_instance_valid(cannonball_body):
@@ -70,14 +72,23 @@ func trigger():
 			hole.color = Color.TRANSPARENT
 			hole.name = name
 			body.get_parent().add_child(hole)
+			cannonballs.erase(cannonball_body)
 			cannonball_body.queue_free()
+			if cannonballs.size() == 0:
+				on_resolved.emit()
 	cannonball_body.body_entered.connect(explode)
+	await get_tree().create_timer(3).timeout
+	for c in cannonballs:
+		if is_instance_valid(c):
+			c.queue_free()
+	on_resolved.emit()
 
 func _notification(what):
 	if what == NOTIFICATION_PREDELETE:
 		for c in cannonballs:
 			if is_instance_valid(c):
 				c.queue_free()
+		on_resolved.emit()
 
 
 func generate_polygon(sides: int, radius: float) -> PackedVector2Array:

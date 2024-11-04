@@ -13,12 +13,12 @@ config_version=5
 config/name="Cannon Fodder"
 run/main_scene="res://TestFightScene.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
 
 [autoload]
 
 Player1="*res://PlayerBehavior.gd"
 Player2="*res://PlayerBehavior.gd"
+GameHost="*res://GameHost.gd"
 
 [display]
 
@@ -40,6 +40,7 @@ common/physics_ticks_per_second=120
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.640755, 0.90263, 1, 1)

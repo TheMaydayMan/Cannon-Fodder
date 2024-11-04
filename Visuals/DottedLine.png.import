@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ogcq4v5hux1k"
-path="res://.godot/imported/CheckerTexture.png-bc45ace63c1a01fc07c23c8c8542a9e1.ctex"
+uid="uid://cby2e7qmkw8af"
+path="res://.godot/imported/DottedLine.png-c160578d1151830c123a08506d51ba44.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CheckerTexture.png"
-dest_files=["res://.godot/imported/CheckerTexture.png-bc45ace63c1a01fc07c23c8c8542a9e1.ctex"]
+source_file="res://Visuals/DottedLine.png"
+dest_files=["res://.godot/imported/DottedLine.png-c160578d1151830c123a08506d51ba44.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0
