@@ -38,15 +38,13 @@ func _ready() -> void:
 		collider = get_parent()
 		body = collider.get_parent()
 	
-	# Find all invalid connections
-	var to_remove = []
-	for connection in connections:
-		if not is_instance_valid(connection):
-			to_remove.append(connection)
-
-	# Erase all invalid connections
-	for connection in to_remove:
-		connections.erase(connection)
+	var invalid_connections := []
+	for c in connections:
+		if not is_instance_valid(c):
+			invalid_connections.append(c)
+	
+	for c in invalid_connections:
+		connections.erase(c)
 	
 	## Group all connected polybodies under the same rigidbody
 	if body == null:
@@ -107,6 +105,7 @@ func recalibrate_centroid() -> void:
 	
 	if poly_count * total_mass == 0: # Sure.
 		queue_free()
+		return
 	centroid /= poly_count * ( total_mass / poly_count ) # Finish average
 	body.mass = abs(total_mass) / 10000 # Also calculate the mass based on density and total area of each polygon
 	

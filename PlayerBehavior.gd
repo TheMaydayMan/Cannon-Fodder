@@ -50,7 +50,7 @@ func reset_actions() -> void:
 	for a in action_polies: if is_instance_valid(a): a.configured = false
 
 func trigger_actions() -> void:
-	for a in action_polies: a.trigger()
+	for a in action_polies: if is_instance_valid(a): a.trigger()
 
 func get_action_resolution_signals() -> Array:
 	var signals = []

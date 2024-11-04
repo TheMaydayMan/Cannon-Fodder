@@ -66,21 +66,19 @@ func trigger():
 	# Set to explode
 	var explode = func explode(_other: Node) -> void:
 		var hole = PolyHole.new()
-		if is_instance_valid(cannonball_body):
-			hole.global_transform = cannonball_body.global_transform
-			hole.polygon = generate_polygon(24, blast_radius)
-			hole.color = Color.TRANSPARENT
-			hole.name = name
-			body.get_parent().add_child(hole)
-			cannonballs.erase(cannonball_body)
-			cannonball_body.queue_free()
-			if cannonballs.size() == 0:
-				on_resolved.emit()
+		hole.global_transform = cannonball_body.global_transform
+		hole.polygon = generate_polygon(24, blast_radius)
+		hole.color = Color.TRANSPARENT
+		hole.name = name
+		body.get_parent().add_child(hole)
+		cannonballs.erase(cannonball_body)
+		cannonball_body.queue_free()
+		if cannonballs.size() == 0:
+			on_resolved.emit()
 	cannonball_body.body_entered.connect(explode)
+	
 	await get_tree().create_timer(3).timeout
-	for c in cannonballs:
-		if is_instance_valid(c):
-			c.queue_free()
+	cannonball_body.queue_free()
 	on_resolved.emit()
 
 func _notification(what):
