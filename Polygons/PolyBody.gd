@@ -38,13 +38,10 @@ func _ready() -> void:
 		collider = get_parent()
 		body = collider.get_parent()
 	
-	var invalid_connections := []
-	for c in connections:
-		if not is_instance_valid(c):
-			invalid_connections.append(c)
-	
-	for c in invalid_connections:
-		connections.erase(c)
+	if false: # This code might just not be nessecary? It might have been causing some issues? idk
+		for c in connections:
+			if not is_instance_valid(c):
+				connections.erase(c)
 	
 	## Group all connected polybodies under the same rigidbody
 	if body == null:
