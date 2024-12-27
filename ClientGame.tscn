@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://e6h5g4clfq61"]
+
+[ext_resource type="Script" path="res://ClientGame.gd" id="1_roi33"]
+
+[node name="ClientGame" type="Node2D"]
+script = ExtResource("1_roi33")

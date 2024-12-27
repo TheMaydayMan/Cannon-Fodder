@@ -1,0 +1,73 @@
+[gd_scene load_steps=4 format=3 uid="uid://biqcd6r2en0dc"]
+
+[ext_resource type="Script" path="res://CreateServer.gd" id="1_3ohku"]
+[ext_resource type="Script" path="res://JoinGame.gd" id="2_4fewc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gh3kf"]
+font_size = 100
+font_color = Color(0, 0, 0, 1)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Cannon Fodder"
+label_settings = SubResource("LabelSettings_gh3kf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Host" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+script = ExtResource("1_3ohku")
+
+[node name="MaxPlayers" type="LineEdit" parent="VBoxContainer/Host"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "32"
+placeholder_text = "Max Players"
+
+[node name="Port" type="LineEdit" parent="VBoxContainer/Host"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "8000"
+placeholder_text = "Port"
+
+[node name="HostButton" type="Button" parent="VBoxContainer/Host"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Host"
+
+[node name="Join" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+script = ExtResource("2_4fewc")
+
+[node name="Address" type="LineEdit" parent="VBoxContainer/Join"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "localhost"
+placeholder_text = "Address"
+
+[node name="Port" type="LineEdit" parent="VBoxContainer/Join"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "8000"
+placeholder_text = "Port"
+
+[node name="JoinButton" type="Button" parent="VBoxContainer/Join"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Join"
+
+[connection signal="pressed" from="VBoxContainer/Host/HostButton" to="VBoxContainer/Host" method="_on_host_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Join/JoinButton" to="VBoxContainer/Join" method="_on_join_button_pressed"]

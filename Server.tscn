@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://jspki8bs0ru0"]
+
+[ext_resource type="Script" path="res://Server.gd" id="1_x45tn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hu0rp"]
+font_size = 100
+font_color = Color(0, 0, 0, 1)
+
+[node name="Server" type="Node2D"]
+script = ExtResource("1_x45tn")
+
+[node name="ServerLabel" type="Label" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+text = "0 clients in lobby
+0 clients playing"
+label_settings = SubResource("LabelSettings_hu0rp")
+horizontal_alignment = 1
+vertical_alignment = 1

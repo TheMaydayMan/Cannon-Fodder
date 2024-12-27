@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://bf4ae8xkrx3kq"]
 
-[ext_resource type="Script" path="res://MoveShader.gd" id="1_ahr8y"]
-[ext_resource type="Script" path="res://Polygons/PolyBody.gd" id="1_easx5"]
+[ext_resource type="Script" path="res://Visuals/MoveShader.gd" id="1_ahr8y"]
+[ext_resource type="Script" path="res://Polygon Scripts/Core/PolyBody.gd" id="1_easx5"]
 [ext_resource type="Texture2D" uid="uid://ogcq4v5hux1k" path="res://Visuals/CheckerTexture.png" id="1_s4tai"]
-[ext_resource type="Script" path="res://CastleLocation.gd" id="2_i8jmw"]
+[ext_resource type="Script" path="res://Castles/CastleLocation.gd" id="2_i8jmw"]
 [ext_resource type="Shader" path="res://Visuals/PolygonTextureWindow.gdshader" id="4_d25n1"]
-[ext_resource type="Script" path="res://Polygons/Outline.gd" id="5_0tvni"]
+[ext_resource type="Script" path="res://Polygon Scripts/Visuals/Outline.gd" id="5_0tvni"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_16xff"]
 shader = ExtResource("4_d25n1")

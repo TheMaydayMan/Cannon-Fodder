@@ -11,14 +11,12 @@ config_version=5
 [application]
 
 config/name="Cannon Fodder"
-run/main_scene="res://TestFightScene.tscn"
+run/main_scene="res://Menu.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 
 [autoload]
 
-Player1="*res://PlayerBehavior.gd"
-Player2="*res://PlayerBehavior.gd"
-GameHost="*res://GameHost.gd"
+Global="*res://Global.gd"
 
 [display]
 

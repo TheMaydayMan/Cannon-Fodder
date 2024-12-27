@@ -2,9 +2,9 @@
 
 [ext_resource type="Shader" path="res://Visuals/PolygonTextureWindow.gdshader" id="1_bxryh"]
 [ext_resource type="Texture2D" uid="uid://ogcq4v5hux1k" path="res://Visuals/CheckerTexture.png" id="2_ngawk"]
-[ext_resource type="Script" path="res://Polygons/PolyBody.gd" id="3_f2nue"]
-[ext_resource type="Script" path="res://Polygons/Outline.gd" id="4_h1jd0"]
-[ext_resource type="Script" path="res://Polygons/Cannon.gd" id="5_j0kcw"]
+[ext_resource type="Script" path="res://Polygon Scripts/Core/PolyBody.gd" id="3_f2nue"]
+[ext_resource type="Script" path="res://Polygon Scripts/Visuals/Outline.gd" id="4_h1jd0"]
+[ext_resource type="Script" path="res://Legacy Game Logic/Cannon.gd" id="5_j0kcw"]
 [ext_resource type="Shader" path="res://Visuals/MovingLine.gdshader" id="6_qg5rk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2cwii"]
