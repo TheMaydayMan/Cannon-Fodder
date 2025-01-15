@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://kqvxtp6cwuc8"]
+
+[node name="GameUI" type="CanvasLayer"]
+
+[node name="PlayersRemaining" type="Label" parent="."]
+offset_left = 560.0
+offset_top = 645.0
+offset_right = 710.0
+offset_bottom = 670.0
+text = "0/2 Players Locked"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LockIn" type="Button" parent="."]
+offset_left = 560.0
+offset_top = 670.0
+offset_right = 710.0
+offset_bottom = 720.0
+theme_override_font_sizes/font_size = 26
+text = "Lock In"
